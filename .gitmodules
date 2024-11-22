@@ -1,0 +1,3 @@
+[submodule "simcse"]
+	path = simcse
+	url = https://github.com/KyungminPark-steck/Bias_contrastive_learning_2.git

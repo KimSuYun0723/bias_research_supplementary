@@ -1,4 +1,3 @@
-# datasets pandas
 from datasets import load_dataset
 
 def select_needed_columns(dataframe, selected_col):

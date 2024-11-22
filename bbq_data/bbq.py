@@ -77,3 +77,7 @@ save_bbq_dataset(
     selected_col=["question_polarity", "category", "question", "context", "context_condition"],
     setting=2
 )"""
+
+"""
+품고 있는 애 VS 안품고 있는 애 개수는 나중에 확인
+"""

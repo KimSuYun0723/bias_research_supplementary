@@ -22,7 +22,7 @@ else:
 
 
 # SETTING 1: BERT VS JMBMT (POOLED OUTPUT)
-print("=== SETTING 1: BERT VS JMBMT (POOLED OUTPUT) ===")
+print("\n=== SETTING 1: BERT VS JMBMT (POOLED OUTPUT) ===")
 bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert/bert_pooled_set1.csv"
 our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt/jmbmt_pooled_set1.csv"
 bert_df = pd.read_csv(bert_csv_path)
@@ -43,9 +43,9 @@ else:
 
 ###########################################################################
 # SETTING 2: BERT VS JMBMT (HS)
-print("=== SETTING 2: BERT VS JMBMT (HS) ===")
-bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert/bert_hs_set2.csv"
-our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt/jmbmt_hs_set2.csv"
+print("\n=== SETTING 2: BERT VS JMBMT (HS) ===")
+bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting2/bert/bert_hs_set2.csv"
+our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting2/jmbmt/jmbmt_hs_set2.csv"
 bert_df = pd.read_csv(bert_csv_path)
 our_model_df = pd.read_csv(our_model_csv_path)
 
@@ -64,9 +64,9 @@ else:
 
 
 # SETTING 2: BERT VS JMBMT (POOLED OUTPUT)
-print("=== SETTING 1: BERT VS JMBMT (POOLED OUTPUT) ===")
-bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert/bert_pooled_set2.csv"
-our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt/jmbmt_pooled_set2.csv"
+print("\n=== SETTING 2: BERT VS JMBMT (POOLED OUTPUT) ===")
+bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting2/bert/bert_pooled_set2.csv"
+our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting2/jmbmt/jmbmt_pooled_set2.csv"
 bert_df = pd.read_csv(bert_csv_path)
 our_model_df = pd.read_csv(our_model_csv_path)
 

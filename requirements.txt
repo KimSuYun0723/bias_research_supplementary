@@ -2,3 +2,4 @@ pandas
 datasets
 transformers
 torch
+rouge=1.0.1

@@ -1,8 +1,8 @@
 import pandas as pd
 
 # CSV 파일 경로 (예시)
-bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bert/bert_simil_results.csv"
-our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/jmbmt/jmbmt_simil_results.csv"
+bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bert/bert_pooled_simil_results.csv"
+our_model_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/jmbmt/jmbmt_pooled_simil_results.csv"
 
 # CSV 파일 로드
 bert_df = pd.read_csv(bert_csv_path)

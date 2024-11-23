@@ -55,9 +55,9 @@ def save_bbq_dataset(dataset_name, save_path, selected_col, setting=1):
             .set_index('question')['context'].to_dict()
         wanted_df = attach_disambig(wanted_df, ambig_context_map)
 
-    """print(f"=== SAVING INTO JSONL... ===")
+    print(f"=== SAVING INTO JSONL... ===")
     #wanted_df.to_csv(save_path, index=False)
-    wanted_df.to_json(save_path, orient="records", lines=True, force_ascii=False)"""
+    wanted_df.to_json(save_path, orient="records", lines=True, force_ascii=False)
 
     print(f"=== SUCCESS! ===")
     return wanted_df
@@ -65,14 +65,14 @@ def save_bbq_dataset(dataset_name, save_path, selected_col, setting=1):
 # Setting 1
 save_bbq_dataset(
     dataset_name= "seyoungsong/BBQ",
-    save_path= "C:/_SY/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set1.jsonl",
+    save_path= "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set1.jsonl",
     selected_col=["question_polarity", "category", "question", "context", "context_condition"]
 )
 
 # Setting 2
 """save_bbq_dataset(
     dataset_name= "seyoungsong/BBQ",
-    save_path= "C:/_SY/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set2.jsonl",
+    save_path= "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set2.jsonl",
     selected_col=["question_polarity", "category", "question", "context", "context_condition"],
     setting=2
 )"""

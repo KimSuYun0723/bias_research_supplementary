@@ -34,14 +34,14 @@ def pair_contexts(data):
     return paired_df
 
 # 데이터 로드
-file_path = "C:/_SY/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set1.jsonl"
+file_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set1.jsonl"
 data = pd.read_json(file_path, lines=True)
 
 # ambig-disambig 1:1 매칭
 paired_df = pair_contexts(data)
 
 # 결과 저장
-output_path = "C:/_SY/bias_research/bbq_data/preprocessed_bbq/organized_bbq_set1.jsonl"
+output_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/organized_bbq_set1.jsonl"
 paired_df.to_json(output_path, orient="records", lines=True)
 
 print(f"결과 저장 완료: {output_path}")

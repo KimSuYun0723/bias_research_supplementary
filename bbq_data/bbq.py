@@ -51,7 +51,7 @@ def save_bbq_dataset(dataset_name, save_path, selected_col, setting=1):
     if setting==2:
         print(f"=== SETTING 2: ATTACHING COLUMN... ===")
         # question : context
-        ambig_context_map = negative_df[(negative_df['context_condition']=='ambig') & (negative_df['category'] == 'Age')][:10]\
+        ambig_context_map = negative_df[negative_df['context_condition']=='ambig']\
             .set_index('question')['context'].to_dict()
         wanted_df = attach_disambig(wanted_df, ambig_context_map)
 
@@ -62,20 +62,20 @@ def save_bbq_dataset(dataset_name, save_path, selected_col, setting=1):
     print(f"=== SUCCESS! ===")
     return wanted_df
 
-# Setting 1
+"""# Setting 1
 save_bbq_dataset(
     dataset_name= "seyoungsong/BBQ",
     save_path= "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set1.jsonl",
     selected_col=["question_polarity", "category", "question", "context", "context_condition"]
 )
-
+"""
 # Setting 2
-"""save_bbq_dataset(
+save_bbq_dataset(
     dataset_name= "seyoungsong/BBQ",
     save_path= "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/cleaned_bbq_set2.jsonl",
     selected_col=["question_polarity", "category", "question", "context", "context_condition"],
     setting=2
-)"""
+)
 
 """
 품고 있는 애 VS 안품고 있는 애 개수는 나중에 확인

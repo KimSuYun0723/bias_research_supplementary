@@ -1,7 +1,9 @@
 # bias_research_supplementary
 This repository is about a supplementary experiment for JMBMT.
 
+
 ## 1. File Tree
+```
 📦bbq_data
  ┣ 📂preprocessed_bbq                    // BBQ 데이터셋 전처리해둔 파일     
  ┃ ┣ 📜cleaned_bbq_set1.jsonl            // Setting1 BBQ 원본 jsonl(question,context,category,polarity..etc)     
@@ -43,3 +45,4 @@ This repository is about a supplementary experiment for JMBMT.
 📜simil_result.py                        // cosine similarity 계산하기.py     
 📜sys.py     
 📜test.py     
+```

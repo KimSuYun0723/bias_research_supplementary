@@ -38,7 +38,7 @@ paired_df = pair_contexts(original_df)
 
 # 첫 번째 데이터셋을 CSV로 저장 (기본 4개의 컬럼 포함)
 original_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/labeled_organized_bbq_set1_2.csv"
-paired_df.to_csv(original_csv_path, index=False)
+#paired_df.to_csv(original_csv_path, index=False)
 
 ########################################################################
 # 2. BERT 데이터셋 읽어오기
@@ -68,14 +68,21 @@ label_df = pd.read_json(label_jsonl_path, lines=True)
 paired_df['label'] = label_df['label']
 
 # 5. 카테고리별로 '우리가 잘한 것' (jmbmt_good) 개수 세기
-category_counts = paired_df[paired_df['label'] == 'jmbmt_good'].groupby('category').size()
+category_counts = paired_df[paired_df['label'] == 'both_bad'].groupby('category').size()
 
-# 6. 결과 출력
-print("카테고리별 '우리가 잘한 것' 개수:")
+# 6. 카테고리별 비율 계산
+category_total_counts = paired_df.groupby('category').size()
+category_ratio = ((category_counts / category_total_counts)*100).fillna(0)  # 비율 계산, 결측치는 0으로 처리
+
+# 7. 결과 출력
+print("카테고리별 '둘다 못한 것' 개수:")
 print(category_counts)
 
-# 7. 최종 데이터셋을 CSV로 저장
+print("\n카테고리별 '둘다 못한 것' 비율:")
+print(category_ratio)
+
+# 8. 최종 데이터셋을 CSV로 저장
 final_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/final_combined.csv"
-paired_df.to_csv(final_csv_path, index=False)
+#paired_df.to_csv(final_csv_path, index=False)
 
 print(f"최종 데이터셋이 저장되었습니다: {final_csv_path}")

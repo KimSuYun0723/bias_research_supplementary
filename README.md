@@ -7,6 +7,7 @@ This repository is about a supplementary experiment for JMBMT.
 📦bbq_data
  ┣ 📂preprocessed_bbq                    // BBQ 데이터셋 전처리해둔 파일     
  ┃ ┣ 📜cleaned_bbq_set1.jsonl            // Setting1 BBQ 원본 jsonl(question,context,category,polarity..etc)     
+ ┃ ┣ 📜filtered_jmbmt_good.csv           // jmbmt가 bert 보다 잘한 예시 추출
  ┃ ┣ 📜final_combined.csv                // 필요한 모든 것이 들어있는 csv !!     
  ┃ ┣ 📜labeled_organized_bbq_set1.csv    // BERT VS JMBMT 중 더 잘한 것 label된 csv     
  ┃ ┣ 📜labeled_organized_bbq_set1.jsonl  // BERT VS JMBMT 중 더 잘한 것 label된 jsonl     
@@ -41,7 +42,8 @@ This repository is about a supplementary experiment for JMBMT.
  ┃ ┣ 📜jmbmt_pooled_set2.csv     
  ┃ ┗ 📜jmbmt_pooled_set2.py     
  
-📜save_result.py                         // 최종 결과 데이터 저장하기.py(final_combine.csv)     
+📜merge_result.py                        // 모든 것을 합친 최종 데이터 생성하기.py
+📜save_result.py                         // 결과 데이터 저장하기.py     
 📜simil_result.py                        // cosine similarity 계산하기.py     
 📜sys.py     
 📜test.py     

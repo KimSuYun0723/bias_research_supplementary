@@ -131,6 +131,6 @@ if __name__ == "__main__":
     print("=== TASK 완료 ===")
 
     # 결과 저장
-    output_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt/jmbmt_pooled_set1.csv"
+    output_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/results_set1/jmbmt_pooled_set1.csv"
     result_df.to_csv(output_path, index=False)
     print(f"결과 저장 완료: {output_path}")

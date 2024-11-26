@@ -37,12 +37,12 @@ def pair_contexts(data):
 paired_df = pair_contexts(original_df)
 
 # 첫 번째 데이터셋을 CSV로 저장 (기본 4개의 컬럼 포함)
-original_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/labeled_organized_bbq_set1_2.csv"
-#paired_df.to_csv(original_csv_path, index=False)
+original_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/final_result/labeled_organized_bbq_set1_2.csv"
+paired_df.to_csv(original_csv_path, index=False)
 
 ########################################################################
 # 2. BERT 데이터셋 읽어오기
-bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert_pooled_set1.csv"
+bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/results_set1/bert_pooled_set1.csv"
 bert_df = pd.read_csv(bert_csv_path)
 
 # BERT 데이터에서 필요한 열을 가져와 첫 번째 데이터셋에 추가
@@ -51,7 +51,7 @@ paired_df['bert_disambig_simil'] = bert_df['disambig_simil']
 paired_df['bert_ambig_more_similar'] = bert_df['ambig_more_similar']
 
 # 3. JMBMT 데이터셋 읽어오기
-jmbmt_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt_pooled_set1.csv"
+jmbmt_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/results_set1/jmbmt_pooled_set1.csv"
 jmbmt_df = pd.read_csv(jmbmt_csv_path)
 
 # JMBMT 데이터에서 필요한 열을 가져와 첫 번째 데이터셋에 추가
@@ -61,28 +61,29 @@ paired_df['jmbmt_ambig_more_similar'] = jmbmt_df['ambig_more_similar']
 
 # 4. 레이블링: 각 행에 대해서 '우리가 잘한 것' (jmbmt_good) 카운트
 # 'label'이 포함된 데이터셋 읽어오기
-label_jsonl_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/labeled_organized_bbq_set1.jsonl"
+label_jsonl_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/results_set1/labeled_organized_bbq_set1.jsonl"
 label_df = pd.read_json(label_jsonl_path, lines=True)
 
 # 'label' 열을 paired_df에 추가 (같은 'question' 기준으로 병합)
 paired_df['label'] = label_df['label']
 
 # 5. 카테고리별로 '우리가 잘한 것' (jmbmt_good) 개수 세기
-category_counts = paired_df[paired_df['label'] == 'both_bad'].groupby('category').size()
+category_counts = paired_df[paired_df['label'] == 'bert_good'].groupby('category').size()
 
 # 6. 카테고리별 비율 계산
 category_total_counts = paired_df.groupby('category').size()
 category_ratio = ((category_counts / category_total_counts)*100).fillna(0)  # 비율 계산, 결측치는 0으로 처리
 
 # 7. 결과 출력
-print("카테고리별 '둘다 못한 것' 개수:")
+print("카테고리별 'BERT가 잘한 것' 개수:")
 print(category_counts)
 
-print("\n카테고리별 '둘다 못한 것' 비율:")
+print("\n카테고리별 'BERT가 잘한 것' 비율:")
 print(category_ratio)
 
+
 # 8. 최종 데이터셋을 CSV로 저장
-final_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocessed_bbq/final_combined.csv"
-#paired_df.to_csv(final_csv_path, index=False)
+final_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/final_result/final_combined.csv"
+paired_df.to_csv(final_csv_path, index=False)
 
 print(f"최종 데이터셋이 저장되었습니다: {final_csv_path}")

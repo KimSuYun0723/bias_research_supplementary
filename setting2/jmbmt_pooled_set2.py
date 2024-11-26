@@ -1,16 +1,7 @@
-import sys
-
-# 모듈 경로를 sys.path에 추가
-module_path = "/home/nlpgpu7/ellt/suyun/bias_research/simcse/SimCSE/pretraining"
-if module_path not in sys.path:
-    sys.path.append(module_path)
-
 import torch
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, AutoModel
 import pandas as pd
 from torch.nn.functional import cosine_similarity
-from simcse import SimCSEPretraining
-
 
 # Step 1: Data Load
 def load_data(file_path):
@@ -22,18 +13,18 @@ def load_data(file_path):
 
 
 # Step 2: 우리 모델 로드
-def load_our_model(model_name="bert-large-uncased"):
+def load_our_model(model_path):
     """
-    우리 모델(SimCSEPretraining)과 토크나이저 로드
+    jmbmt 모델과 토크나이저 로드
     """
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = SimCSEPretraining(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
+    model = AutoModel.from_pretrained(model_path, local_files_only=True)
     model.eval()  # 평가 모드로 설정
     return tokenizer, model
 
 
 # Step 3: Hidden State 추출
-def get_hidden_state_our_model(tokenizer, model, text, device="cpu"):
+def get_pooled_output(tokenizer, model, text, device="cpu"):
     """
     우리 모델에서 CLS hidden state 추출
     """
@@ -51,12 +42,12 @@ def get_hidden_state_our_model(tokenizer, model, text, device="cpu"):
 
     # Forward pass
     with torch.no_grad():
-        outputs = model.model(input_ids=inputs["input_ids"], 
+        outputs = model(input_ids=inputs["input_ids"], 
                               attention_mask=inputs["attention_mask"],
                               output_hidden_states=True)
 
         # CLS 토큰의 Hidden State 추출
-        pooled_output = model.get_pooled_output(outputs)
+        pooled_output = outputs.pooler_output
 
     if len(text) < 100:  # 텍스트 길이에 따라 출력 제한
             print(f"CLS Hidden State for text: {text}\n{pooled_output}\n")
@@ -88,13 +79,13 @@ def perform_task(data, tokenizer, model, device="cpu"):
     for idx, row in data.iterrows():
         question = row['question']
         ambig_context = row['ambig_context']
-        disambig_context = row['disambig_minus_ambig']
+        disambig_context = row['disambig_context']
 
         try:
             # Hidden state 추출
-            hidden_q = get_hidden_state_our_model(tokenizer, model, question, device)
-            hidden_ambig = get_hidden_state_our_model(tokenizer, model, ambig_context, device)
-            hidden_disambig = get_hidden_state_our_model(tokenizer, model, disambig_context, device)
+            hidden_q = get_pooled_output(tokenizer, model, question, device)
+            hidden_ambig = get_pooled_output(tokenizer, model, ambig_context, device)
+            hidden_disambig = get_pooled_output(tokenizer, model, disambig_context, device)
 
             # 유사도 계산
             simil_ambig = calcul_simil(hidden_q, hidden_ambig)
@@ -129,7 +120,8 @@ if __name__ == "__main__":
     print(f"데이터 로드 완료: {len(data)} rows")
 
     # 모델 및 토크나이저 로드
-    tokenizer, model = load_our_model("bert-large-uncased")
+    model_path = "/home/nlpgpu7/ellt/suyun/bias_research/jmbmt_model"
+    tokenizer, model = load_our_model(model_path)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # Task 수행

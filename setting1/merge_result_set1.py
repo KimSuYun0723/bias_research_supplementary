@@ -42,7 +42,7 @@ original_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/bbq_data/preprocesse
 
 ########################################################################
 # 2. BERT 데이터셋 읽어오기
-bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert/bert_pooled_set1.csv"
+bert_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/bert_pooled_set1.csv"
 bert_df = pd.read_csv(bert_csv_path)
 
 # BERT 데이터에서 필요한 열을 가져와 첫 번째 데이터셋에 추가
@@ -51,7 +51,7 @@ paired_df['bert_disambig_simil'] = bert_df['disambig_simil']
 paired_df['bert_ambig_more_similar'] = bert_df['ambig_more_similar']
 
 # 3. JMBMT 데이터셋 읽어오기
-jmbmt_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt/jmbmt_pooled_set1.csv"
+jmbmt_csv_path = "/home/nlpgpu7/ellt/suyun/bias_research/setting1/jmbmt_pooled_set1.csv"
 jmbmt_df = pd.read_csv(jmbmt_csv_path)
 
 # JMBMT 데이터에서 필요한 열을 가져와 첫 번째 데이터셋에 추가
